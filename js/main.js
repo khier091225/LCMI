@@ -38,6 +38,34 @@ const filters = document.querySelector(".filter-bar");
 if (filters && products.length) {
   filters.hidden = false;
   const count = document.querySelector("#product-count");
+  const showProducts = document.querySelector("#show-products");
+  const more = document.querySelector(".catalogue-more");
+  let expanded = !showProducts;
+  let selected = "all";
+  const renderProducts = () => {
+    const matches = products.filter(
+      (product) => selected === "all" || product.dataset.category === selected,
+    );
+    products.forEach((product) => {
+      product.hidden = true;
+    });
+    const visible =
+      selected !== "all" || expanded ? matches : matches.slice(0, 6);
+    visible.forEach((product) => {
+      product.hidden = false;
+    });
+    count.textContent =
+      visible.length === matches.length
+        ? `${visible.length} ${visible.length === 1 ? "product" : "products"}`
+        : `${visible.length} of ${matches.length} products`;
+    if (showProducts && more) {
+      more.hidden = selected !== "all" || matches.length <= 6;
+      showProducts.textContent = expanded
+        ? "Show fewer products"
+        : `View all ${matches.length} products`;
+      showProducts.setAttribute("aria-expanded", String(expanded));
+    }
+  };
   filters.addEventListener("click", (event) => {
     const button = event.target.closest("[data-filter]");
     if (!button) return;
@@ -46,15 +74,16 @@ if (filters && products.length) {
       .forEach((item) =>
         item.setAttribute("aria-pressed", String(item === button)),
       );
-    let visible = 0;
-    products.forEach((product) => {
-      product.hidden =
-        button.dataset.filter !== "all" &&
-        product.dataset.category !== button.dataset.filter;
-      if (!product.hidden) visible++;
-    });
-    count.textContent = `${visible} ${visible === 1 ? "product" : "products"}`;
+    selected = button.dataset.filter;
+    renderProducts();
   });
+  showProducts?.addEventListener("click", () => {
+    expanded = !expanded;
+    renderProducts();
+    if (!expanded)
+      document.querySelector("#products")?.scrollIntoView({ block: "start" });
+  });
+  renderProducts();
 }
 
 const gallery = [...document.querySelectorAll("[data-gallery]")];
@@ -101,7 +130,13 @@ if (
       )
         return;
       event.preventDefault();
-      items = gallery.filter((entry) => !entry.closest("[hidden]"));
+      items = gallery.filter(
+        (entry) =>
+          entry.dataset.galleryGroup === item.dataset.galleryGroup &&
+          !entry.closest("[hidden]") &&
+          !entry.closest("details:not([open])") &&
+          entry.getClientRects().length > 0,
+      );
       index = items.indexOf(item);
       trigger = item;
       update();
@@ -164,7 +199,7 @@ const motion = matchMedia("(prefers-reduced-motion: reduce)");
 if (!motion.matches && typeof Element.prototype.animate === "function") {
   document
     .querySelectorAll(
-      ".hero-copy h1, .hero-copy > p, .hero-copy .button, .hero-photo, .page-intro > *, .contact-intro > div",
+      ".hero-copy h1, .hero-copy > p, .hero-copy .button, .hero-photo, .page-intro > *",
     )
     .forEach((element, index) => {
       element.style.setProperty("--arrival-delay", `${index * 65}ms`);
@@ -187,7 +222,7 @@ if (!motion.matches && typeof Element.prototype.animate === "function") {
     );
     document
       .querySelectorAll(
-        ".section-heading h2, .section-heading > div, .capability-pictures img, .plant-layout img, .plant-layout h2, .plant-layout p, .plant-layout .text-link",
+        ".section-heading h2, .section-heading > div, .capability-pictures img, .plant-layout img, .plant-layout h2, .plant-layout h3, .plant-layout p, .plant-layout .text-link, .contact-intro > div",
       )
       .forEach((element) => observer.observe(element));
     motion.addEventListener(
