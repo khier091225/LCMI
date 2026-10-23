@@ -41,6 +41,8 @@ Display images are local WebP copies in `assets/images/optimized/`; gallery link
 
 Facilities thumbnails share a 4:3 frame and fill it with a crop, including categories with only one image. Source documents with blank paper around their photographs use the `image-preview--padded` treatment to keep that paper outside the thumbnail. Opening a thumbnail always shows the complete original image.
 
+On About, quality records and customer recognition form separate galleries. Documents use complete, uncropped 3:4 previews; award photographs use 4:3 thumbnails. The recognition text plate remains uncropped. The quality policy uses two balanced desktop columns and returns to its original reading order on phones. In-page navigation links to the company profile, officers, policy and records.
+
 Fonts are served locally as WOFF2, with source information and OFL notices in `assets/fonts/`.
 
 The privacy and website-information routes explicitly await company-approved content and carry `noindex`. Do not republish the unrelated organization’s text that previously occupied those pages. Certification records are historical, and employee figures remain dated October 2024.

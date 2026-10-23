@@ -108,3 +108,9 @@ Remaining limitations: some original photographs and catalogue plates are low re
 3. Supply current high-resolution product photography or facility footage if available.
 
 Review artifacts are local and ignored by Git. `DESIGN.md` records the system for future edits. An optional Impeccable `init` session can capture owner-confirmed product context later.
+
+## About page refinement
+
+A subsequent review improved the company facts grid, officer hierarchy, contact grouping and section navigation. The quality policy now fills two balanced desktop columns while keeping its original reading order on phones. Quality records and customer-recognition photographs have separate galleries with consistent 3:4 document previews and 4:3 photographic previews; document text remains uncropped.
+
+Verified at 320, 390, 768, 1024 and 1440px: no horizontal overflow and no axe WCAG A/AA violations. Image preview keyboard controls, restored focus and the policy navigation link work. A source comparison confirmed the company facts, officers, policy text, historical certification statements and all original image links were preserved. The source detector's existing logical-padding warning remains a false positive; the rendered section has horizontal gutters and vertical padding.
