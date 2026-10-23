@@ -39,6 +39,8 @@ Headings are short, left aligned and balanced. Use filled navy or pale surfaces 
 
 Display images are local WebP copies in `assets/images/optimized/`; gallery links retain the existing full-size originals. Keep product plates uncropped so their embedded labels remain legible. All displayed photographs and catalogue plates come from the original project. No generated images or new stock photography were added.
 
+Facilities thumbnails share a 4:3 frame and fill it with a crop, including categories with only one image. Source documents with blank paper around their photographs use the `image-preview--padded` treatment to keep that paper outside the thumbnail. Opening a thumbnail always shows the complete original image.
+
 Fonts are served locally as WOFF2, with source information and OFL notices in `assets/fonts/`.
 
 The privacy and website-information routes explicitly await company-approved content and carry `noindex`. Do not republish the unrelated organization’s text that previously occupied those pages. Certification records are historical, and employee figures remain dated October 2024.

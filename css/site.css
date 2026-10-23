@@ -454,13 +454,22 @@ figcaption {
   gap: 24px;
   align-content: start;
 }
-.equipment-photos img {
+.equipment-photos .image-preview {
   aspect-ratio: 4/3;
-  object-fit: contain;
   background: var(--paper);
 }
-.equipment-photos figure:only-child {
-  grid-column: 1 / -1;
+.equipment-photos img {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+/* These source documents include blank paper beneath the actual photograph. */
+.equipment-photos .image-preview--padded img {
+  width: var(--preview-image-width, 100%);
+  height: auto;
+  aspect-ratio: auto;
 }
 .source-note {
   font-size: 16px;
